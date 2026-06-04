@@ -12,6 +12,16 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\KecanduanController;
 use App\Http\Controllers\ProfilController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/run-seed-secret', function () {
+    Artisan::call('migrate:fresh', [
+        '--seed' => true,
+        '--force' => true,
+    ]);
+
+    return 'Migration dan seeder berhasil dijalankan';
+});
 
 /*
 |--------------------------------------------------------------------------
