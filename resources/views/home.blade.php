@@ -6,7 +6,11 @@
             <div class="row align-items-start mt-4">
                 <div class="col-md-5">
                     <div class="img-box">
-                        <img src="{{ Storage::url($profil->foto) }}" alt="Profil Image">
+                       @if($profil && $profil->foto)
+                            <img src="{{ Storage::url($profil->foto) }}" alt="Profil Image">
+                        @else
+                            <img src="{{ asset('assets/img/default.png') }}" alt="Profil Image">
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-7">
