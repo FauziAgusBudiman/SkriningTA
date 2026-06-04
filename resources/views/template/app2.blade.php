@@ -9,6 +9,7 @@
     <title>Sistem Pakar Skrining Kecanduan Game Online</title>
 
     <link href="{{ asset('assets/frontend/css/bootstrap.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" />
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
