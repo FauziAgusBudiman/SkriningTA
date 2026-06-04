@@ -3,24 +3,38 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class RenamePenyakitToTingkatKecanduan extends Migration
 {
     public function up()
     {
+        try {
+            DB::statement('ALTER TABLE aturan DROP FOREIGN KEY aturan_penyakit_id_foreign');
+        } catch (\Throwable $e) {}
+
+        try {
+            DB::statement('ALTER TABLE hasil DROP FOREIGN KEY hasil_penyakit_id_foreign');
+        } catch (\Throwable $e) {}
+
+        
         if (Schema::hasColumn('aturan', 'penyakit_id')) {
             Schema::table('aturan', function (Blueprint $table) {
                 try {
-                    $table->dropForeign(['penyakit_id']);
-                } catch (\Throwable $e) {}
+                    DB::statement('ALTER TABLE aturan DROP FOREIGN KEY aturan_penyakit_id_foreign');
+                } catch (\Throwable $e) {
+                    // abaikan jika foreign key tidak ada
+                }
             });
         }
 
         if (Schema::hasColumn('hasil', 'penyakit_id')) {
             Schema::table('hasil', function (Blueprint $table) {
                 try {
-                    $table->dropForeign(['penyakit_id']);
-                } catch (\Throwable $e) {}
+                    DB::statement('ALTER TABLE hasil DROP FOREIGN KEY hasil_penyakit_id_foreign');
+                } catch (\Throwable $e) {
+                    // abaikan jika foreign key tidak ada
+                }
             });
         }
 
