@@ -20,7 +20,7 @@
                                 Tentang
                             </h2>
                         </div>
-                        {!! Str::words($profil->profil, 50, '') !!}
+                        {{ Str::words(optional($profil)->profil, 50, '') }}
                         <p>
                             <a href="{{ route('about') }}">
                                 Selengkapnya
