@@ -1,22 +1,31 @@
 @extends('template.app2')
 
 @section('content')
-    <!-- Google Fonts for High-Fidelity Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts for Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- CSS styling for Premium Slideshow & Timeline -->
     <style>
         .screening-wrapper {
-            font-family: 'Poppins', sans-serif;
-            background: #ffffff; /* Seamless white page canvas under header */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f8fafc;
             min-height: calc(100vh - 100px);
-            padding: 40px 0;
+            padding: 50px 0;
+            color: #1e293b;
+        }
+
+        .screening-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            padding: 40px;
         }
 
         /* Progress Bar Styling */
         .progress-container {
             background: #ffffff;
-            padding: 24px 0px; /* Aligned with container columns */
+            padding: 0 0 24px 0;
             border-bottom: 1px solid #f1f5f9;
             margin-bottom: 30px;
         }
@@ -29,22 +38,22 @@
         }
 
         .progress-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1e293b;
+            font-size: 15px;
+            font-weight: 600;
+            color: #475569;
         }
 
         .progress-percentage {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             color: #0383ef;
-            background: rgba(3, 131, 239, 0.1);
+            background: rgba(3, 131, 239, 0.08);
             padding: 4px 12px;
-            border-radius: 20px;
+            border-radius: 100px;
         }
 
         .progress-bar-bg {
-            height: 10px;
+            height: 8px;
             background: #e2e8f0;
             border-radius: 10px;
             overflow: hidden;
@@ -54,7 +63,7 @@
         .progress-bar-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #0383ef, #00c6ff, #00d2ff);
+            background: #0383ef;
             border-radius: 10px;
             transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -62,16 +71,15 @@
         /* Question Slides Styling */
         .slides-deck {
             position: relative;
-            min-height: 500px;
+            min-height: 480px;
             background: #ffffff;
         }
 
         .screening-slide {
             display: none;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 20px 0px; /* Aligned with container columns */
+            transform: translateY(15px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .screening-slide.active {
@@ -83,23 +91,23 @@
         .question-code-badge {
             background: rgba(3, 131, 239, 0.08);
             color: #0383ef;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
-            padding: 6px 16px;
-            border-radius: 30px;
+            padding: 6px 14px;
+            border-radius: 100px;
             display: inline-block;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             border: 1px solid rgba(3, 131, 239, 0.15);
         }
 
         .question-title-text {
-            font-family: 'Fredoka', 'Poppins', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 24px;
+            font-weight: 800;
             color: #0f172a;
-            line-height: 1.35;
-            letter-spacing: 0.5px;
+            line-height: 1.4;
+            letter-spacing: -0.5px;
             margin-top: 12px;
             margin-bottom: 25px;
         }
@@ -107,7 +115,7 @@
         /* Illustration and Image Frame */
         .illustration-frame {
             background: #f8fafc;
-            border: 2px dashed #cbd5e1;
+            border: 1px solid #e2e8f0;
             border-radius: 20px;
             padding: 20px;
             height: 100%;
@@ -116,36 +124,35 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
         .illustration-frame:hover {
-            border-color: #0383ef;
-            background: rgba(3, 131, 239, 0.02);
+            border-color: rgba(3, 131, 239, 0.3);
+            background: rgba(3, 131, 239, 0.01);
         }
 
         .illustration-img {
-            max-height: 270px;
+            max-height: 260px;
             max-width: 100%;
             border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
             object-fit: contain;
             transition: transform 0.4s ease;
         }
 
         .illustration-img:hover {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
         .illustration-placeholder-icon {
-            font-size: 64px;
+            font-size: 56px;
             color: #94a3b8;
             animation: float-icon 3s ease-in-out infinite;
         }
 
         /* Timeline Labels */
         .options-list-label {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #64748b;
             text-transform: uppercase;
@@ -167,12 +174,11 @@
             top: 25px;
             bottom: 25px;
             left: 50%;
-            width: 4px;
-            background: #cbd5e1;
+            width: 2px;
+            background: #e2e8f0;
             transform: translateX(-50%);
             z-index: 1;
             border-radius: 2px;
-            transition: background 0.3s ease;
         }
 
         .timeline-row {
@@ -192,7 +198,7 @@
         @keyframes popUpRow {
             0% {
                 opacity: 0;
-                transform: translateY(15px) scale(0.97);
+                transform: translateY(10px) scale(0.98);
             }
             100% {
                 opacity: 1;
@@ -201,18 +207,16 @@
         }
 
         .screening-slide.active .timeline-row {
-            animation: popUpRow 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            animation: popUpRow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
             opacity: 0;
         }
 
-        /* Staggered animation delays for the rows */
-        .screening-slide.active .timeline-row:nth-child(2) { animation-delay: 0.06s; }
-        .screening-slide.active .timeline-row:nth-child(3) { animation-delay: 0.12s; }
-        .screening-slide.active .timeline-row:nth-child(4) { animation-delay: 0.18s; }
-        .screening-slide.active .timeline-row:nth-child(5) { animation-delay: 0.24s; }
-        .screening-slide.active .timeline-row:nth-child(6) { animation-delay: 0.30s; }
+        .screening-slide.active .timeline-row:nth-child(2) { animation-delay: 0.05s; }
+        .screening-slide.active .timeline-row:nth-child(3) { animation-delay: 0.10s; }
+        .screening-slide.active .timeline-row:nth-child(4) { animation-delay: 0.15s; }
+        .screening-slide.active .timeline-row:nth-child(5) { animation-delay: 0.20s; }
+        .screening-slide.active .timeline-row:nth-child(6) { animation-delay: 0.25s; }
 
-        /* Columns for perfect zig-zag sizing */
         .timeline-col {
             flex: 1;
             display: flex;
@@ -236,40 +240,39 @@
 
         /* Circular timeline node */
         .timeline-node {
-            width: 18px;
-            height: 18px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: #ffffff;
-            border: 4px solid #cbd5e1;
+            border: 3px solid #cbd5e1;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 0 0px rgba(3, 131, 239, 0.2);
         }
 
         /* Active highlight for row/button selections */
         .timeline-row.selected .timeline-node {
             border-color: #0383ef;
             background: #0383ef;
-            box-shadow: 0 0 0 6px rgba(3, 131, 239, 0.25);
-            transform: translateX(-50%) scale(1.2);
+            box-shadow: 0 0 0 5px rgba(3, 131, 239, 0.15);
+            transform: translateX(-50%) scale(1.1);
         }
 
         /* Premium timeline buttons */
         .timeline-btn {
             background: #ffffff;
-            border: 2px solid #e2e8f0;
+            border: 1px solid #e2e8f0;
             color: #475569;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14px;
             padding: 10px 18px;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.2s ease;
             outline: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
             min-width: 170px;
             text-align: center;
             white-space: normal;
@@ -277,29 +280,27 @@
         }
 
         .timeline-btn:hover {
-            border-color: #0383ef;
+            border-color: rgba(3, 131, 239, 0.4);
             color: #0383ef;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(3, 131, 239, 0.1);
+            background: rgba(3, 131, 239, 0.01);
         }
 
         .timeline-btn.selected {
-            background: linear-gradient(135deg, #0383ef, #00c6ff);
-            border-color: transparent;
+            background: #0383ef;
+            border-color: #0383ef;
             color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 18px rgba(3, 131, 239, 0.3);
+            box-shadow: 0 4px 12px rgba(3, 131, 239, 0.15);
         }
 
         .timeline-btn.selected:hover {
-            box-shadow: 0 10px 22px rgba(3, 131, 239, 0.4);
+            box-shadow: 0 6px 16px rgba(3, 131, 239, 0.2);
             color: #ffffff;
         }
 
         /* Premium Pagination styling as separate elegant boxes */
         .pagination {
             display: flex;
-            gap: 6px; /* Gap between buttons matching wireframe */
+            gap: 6px;
             padding-left: 0;
             list-style: none;
             border: none;
@@ -312,40 +313,31 @@
             border: 1px solid #e2e8f0;
             padding: 8px 14px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             background: #ffffff;
-            border-radius: 8px !important; /* Every box has independent rounded corners */
+            border-radius: 8px !important;
             display: block;
             text-align: center;
             min-width: 40px;
-        }
-
-        .page-item:first-child .page-link {
-            border-top-left-radius: 8px !important;
-            border-bottom-left-radius: 8px !important;
-        }
-
-        .page-item:last-child .page-link {
-            border-top-right-radius: 8px !important;
-            border-bottom-right-radius: 8px !important;
-        }
-
-        .page-item.active .page-link {
-            background: linear-gradient(135deg, #0383ef, #00c6ff);
-            border-color: transparent;
-            color: #ffffff;
-            box-shadow: 0 4px 10px rgba(3, 131, 239, 0.25);
         }
 
         .page-item .page-link:hover {
             background: #f1f5f9;
             color: #0383ef;
             border-color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        .page-item.active .page-link {
+            background: #0383ef;
+            border-color: #0383ef;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(3, 131, 239, 0.15);
         }
 
         .page-item.active .page-link:hover {
             color: #ffffff;
-            background: linear-gradient(135deg, #026ebd, #00b3e6);
+            background: #026ebd;
         }
 
         .page-item.answered .page-link {
@@ -355,10 +347,10 @@
         /* Footer Controls */
         .screening-footer {
             background: #ffffff;
-            padding: 30px 0px; /* Aligned with container columns */
+            padding: 30px 0 0 0;
             border-top: 1px solid #f1f5f9;
             display: flex;
-            flex-direction: column; /* Centered vertical stack */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             margin-top: 30px;
@@ -369,14 +361,14 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            overflow: hidden; /* Hide outer overflow bounds */
+            overflow: hidden;
         }
 
         .nav-btn {
-            border-radius: 30px;
+            border-radius: 100px;
             font-weight: 600;
             padding: 10px 24px;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             white-space: nowrap;
         }
 
@@ -389,39 +381,40 @@
         .nav-btn-prev:hover {
             background: #e2e8f0;
             color: #1e293b;
-            transform: translateX(-2px);
+            text-decoration: none;
         }
 
         .nav-btn-next {
             background: #0383ef;
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(3, 131, 239, 0.2);
+            box-shadow: 0 4px 12px rgba(3, 131, 239, 0.1);
             border: none;
         }
 
         .nav-btn-next:hover {
             background: #026ebd;
-            box-shadow: 0 6px 16px rgba(3, 131, 239, 0.35);
-            transform: translateX(2px);
+            box-shadow: 0 6px 16px rgba(3, 131, 239, 0.2);
+            text-decoration: none;
+            color: #ffffff;
         }
 
         .nav-btn-submit {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: #10b981;
             color: #ffffff;
             border: none;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
         }
 
         .nav-btn-submit:hover {
-            background: linear-gradient(135deg, #059669, #047857);
-            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
-            transform: translateY(-1px);
+            background: #059669;
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.25);
+            color: #ffffff;
         }
 
         /* Custom Float Animations */
         @keyframes float-icon {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
         }
 
         /* Hide scrollbars globally on swipable pagination and enable scrolling on all screens */
@@ -443,10 +436,15 @@
            MOBILE RESPONSIVENESS OVERRIDES
            ========================================================= */
 
-        /* 1. Tablet & Lower Styles (Horizontal swipable pagination) */
+        /* 1. Tablet & Lower Styles */
         @media (max-width: 768px) {
             .screening-wrapper {
-                padding: 20px 0;
+                padding: 30px 0;
+            }
+
+            .screening-card {
+                padding: 24px;
+                border-radius: 16px;
             }
 
             nav[aria-label="Page navigation"] {
@@ -484,11 +482,11 @@
 
             .page-item .page-link {
                 padding: 6px 12px !important;
-                font-size: 14px !important;
+                font-size: 13px !important;
             }
 
             .screening-footer {
-                padding: 24px 0px !important;
+                padding: 24px 0 0 0 !important;
                 gap: 15px !important;
             }
 
@@ -504,10 +502,10 @@
             }
         }
 
-        /* 2. Narrow Mobile Viewports (Morph Timeline to Left-Aligned Checklist) */
+        /* 2. Narrow Mobile Viewports */
         @media (max-width: 576px) {
             .question-title-text {
-                font-size: 20px !important;
+                font-size: 18px !important;
                 margin-bottom: 15px !important;
             }
 
@@ -560,7 +558,7 @@
             }
 
             .timeline-row.selected .timeline-node {
-                transform: translateY(-50%) scale(1.2) !important;
+                transform: translateY(-50%) scale(1.1) !important;
             }
 
             /* Timeline buttons stretch to full width and align text left */
@@ -577,161 +575,163 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-10 col-lg-12">
+                    <div class="screening-card">
 
-                    <!-- Top Progress Bar Container (Preserved) -->
-                    <div class="progress-container">
-                        <div class="progress-header">
-                            <span class="progress-title">
-                                <i class="fa fa-chart-line text-primary mr-2"></i>Kemajuan Skrining: 
-                                <span id="currentQuestionText" class="font-weight-bold text-slate-800">1</span> dari <span class="font-weight-bold">{{ count($gejala) }}</span>
-                            </span>
-                            <span class="progress-percentage" id="progressPercentText">0%</span>
-                        </div>
-                        <div class="progress-bar-bg">
-                            <div class="progress-bar-fill" id="progressBarFill"></div>
-                        </div>
-                    </div>
-
-                    <!-- Main Screening Form -->
-                    <form action="{{ route('diagnosis.hasil') }}" method="post" id="screeningForm">
-                        @csrf
-
-                        <!-- Hidden inputs for mapping final post back values -->
-                        @foreach ($gejala as $row)
-                            <input type="hidden" name="gejala[{{ $row->id }}]" id="gejala_input_{{ $row->id }}" value="{{ old('gejala.' . $row->id, '0') }}">
-                        @endforeach
-
-                        <!-- Deck of Slides -->
-                        <div class="slides-deck">
-                            @foreach ($gejala as $index => $row)
-                                <div class="screening-slide {{ $index === 0 ? 'active' : '' }}" id="slide_{{ $index }}" data-index="{{ $index }}" data-id="{{ $row->id }}">
-                                    
-                                    <!-- Heading: Left-aligned title (matching left panel content edge) -->
-                                    <div class="text-left mb-4">
-                                        <span class="question-code-badge">Gejala {{ $row->kode_gejala }}</span>
-                                        <h1 class="question-title-text text-left mt-2 mb-0">{{ $row->nama_gejala }}</h1>
-                                    </div>
-
-                                    <div class="row align-items-center mt-3">
-                                        <!-- Left side: Illustration GIF/Image Frame -->
-                                        <div class="col-lg-6 mb-4 mb-lg-0 text-center">
-                                            <div class="illustration-frame">
-                                                @if ($row->animasi)
-                                                    <img src="{{ Storage::url($row->animasi) }}" alt="Animasi {{ $row->kode_gejala }}" class="illustration-img">
-                                                @else
-                                                    <div class="text-center">
-                                                        <i class="fa fa-gamepad illustration-placeholder-icon"></i>
-                                                        <p class="text-muted font-italic m-0 mt-3" style="font-size: 13px;">Ilustrasi Pendukung {{ $row->kode_gejala }}</p>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <!-- Right side: Interactive Vertical Zig-Zag Timeline -->
-                                        <div class="col-lg-6">
-                                            <div class="options-container pl-lg-3">
-                                                <span class="options-list-label mb-4">
-                                                    <i class="fa fa-heartbeat text-danger mr-2"></i>Tingkat Keyakinan Anda:
-                                                </span>
-
-                                                <div class="timeline-wrapper" data-gejala-id="{{ $row->id }}">
-                                                    <div class="timeline-line-path"></div>
-
-                                                    <!-- Row 1: Tidak Yakin (Left Side) - Value 0 -->
-                                                    <div class="timeline-row {{ old('gejala.' . $row->id) === '0' ? 'selected' : '' }}">
-                                                        <div class="timeline-col left-col">
-                                                            <button type="button" class="btn timeline-btn {{ old('gejala.' . $row->id) === '0' ? 'selected' : '' }}" data-value="0">
-                                                                Tidak Yakin
-                                                            </button>
-                                                        </div>
-                                                        <div class="timeline-node"></div>
-                                                        <div class="timeline-col empty-col"></div>
-                                                    </div>
-
-                                                    <!-- Row 2: Cukup Yakin (Right Side) - Value 0.4 -->
-                                                    <div class="timeline-row {{ old('gejala.' . $row->id) === '0.4' ? 'selected' : '' }}">
-                                                        <div class="timeline-col empty-col"></div>
-                                                        <div class="timeline-node"></div>
-                                                        <div class="timeline-col right-col">
-                                                            <button type="button" class="btn timeline-btn {{ old('gejala.' . $row->id) === '0.4' ? 'selected' : '' }}" data-value="0.4">
-                                                                Cukup Yakin
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Row 3: Yakin (Left Side) - Value 0.6 -->
-                                                    <div class="timeline-row {{ old('gejala.' . $row->id) === '0.6' ? 'selected' : '' }}">
-                                                        <div class="timeline-col left-col">
-                                                            <button type="button" class="btn timeline-btn {{ old('gejala.' . $row->id) === '0.6' ? 'selected' : '' }}" data-value="0.6">
-                                                                Yakin
-                                                            </button>
-                                                        </div>
-                                                        <div class="timeline-node"></div>
-                                                        <div class="timeline-col empty-col"></div>
-                                                    </div>
-
-                                                    <!-- Row 4: Sangat Yakin (Right Side) - Value 0.8 -->
-                                                    <div class="timeline-row {{ old('gejala.' . $row->id) === '0.8' ? 'selected' : '' }}">
-                                                        <div class="timeline-col empty-col"></div>
-                                                        <div class="timeline-node"></div>
-                                                        <div class="timeline-col right-col">
-                                                            <button type="button" class="btn timeline-btn {{ old('gejala.' . $row->id) === '0.8' ? 'selected' : '' }}" data-value="0.8">
-                                                                Sangat Yakin
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Row 5: Sangat Yakin Sekali / Pasti (Left Side) - Value 1.0 -->
-                                                    <div class="timeline-row {{ old('gejala.' . $row->id) === '1.0' ? 'selected' : '' }}">
-                                                        <div class="timeline-col left-col">
-                                                            <button type="button" class="btn timeline-btn {{ old('gejala.' . $row->id) === '1.0' ? 'selected' : '' }}" data-value="1.0">
-                                                                Sangat Yakin / Pasti
-                                                            </button>
-                                                        </div>
-                                                        <div class="timeline-node"></div>
-                                                        <div class="timeline-col empty-col"></div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <!-- Footer Actions & Pagination -->
-                        <div class="screening-footer text-center">
-                            <nav aria-label="Page navigation" class="pagination-nav-wrapper my-2 my-lg-0">
-                                <ul class="pagination justify-content-center mb-0" id="screeningPagination">
-                                    <li class="page-item" id="pagPrev">
-                                        <a class="page-link" href="javascript:void(0)" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    @foreach ($gejala as $index => $row)
-                                        <li class="page-item {{ $index === 0 ? 'active' : '' }}" id="pag_{{ $index }}" data-target-index="{{ $index }}">
-                                            <a class="page-link" href="javascript:void(0)">{{ $index + 1 }}</a>
-                                        </li>
-                                    @endforeach
-                                    <li class="page-item" id="pagNext">
-                                        <a class="page-link" href="javascript:void(0)" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-
-                            <div class="mt-3" id="submitBtnContainer" style="display: none; width: 100%;">
-                                <button type="submit" class="btn nav-btn nav-btn-submit mx-auto" id="btnSubmitForm">
-                                    <i class="fa fa-check-circle mr-2"></i> Proses Hasil Skrining
-                                </button>
+                        <!-- Top Progress Bar Container (Preserved) -->
+                        <div class="progress-container">
+                            <div class="progress-header">
+                                <span class="progress-title">
+                                    <i class="fa fa-chart-line text-primary mr-2"></i>Kemajuan Skrining: 
+                                    <span id="currentQuestionText" class="font-weight-bold text-slate-800">1</span> dari <span class="font-weight-bold">{{ count($gejala) }}</span>
+                                </span>
+                                <span class="progress-percentage" id="progressPercentText">0%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="progressBarFill"></div>
                             </div>
                         </div>
 
-                    </form>
+                        <!-- Main Screening Form -->
+                        <form action="{{ route('diagnosis.hasil') }}" method="post" id="screeningForm">
+                            @csrf
 
+                            <!-- Hidden inputs for mapping final post back values -->
+                            @foreach ($gejala as $row)
+                                <input type="hidden" name="gejala[{{ $row->id }}]" id="gejala_input_{{ $row->id }}" value="{{ old('gejala.' . $row->id, '0') }}">
+                            @endforeach
+
+                            <!-- Deck of Slides -->
+                            <div class="slides-deck">
+                                @foreach ($gejala as $index => $row)
+                                    <div class="screening-slide {{ $index === 0 ? 'active' : '' }}" id="slide_{{ $index }}" data-index="{{ $index }}" data-id="{{ $row->id }}">
+                                        
+                                        <!-- Heading: Left-aligned title (matching left panel content edge) -->
+                                        <div class="text-left mb-4">
+                                            <span class="question-code-badge">Gejala {{ $row->kode_gejala }}</span>
+                                            <h1 class="question-title-text text-left mt-2 mb-0">{{ $row->nama_gejala }}</h1>
+                                        </div>
+
+                                        <div class="row align-items-center mt-3">
+                                            <!-- Left side: Illustration GIF/Image Frame -->
+                                            <div class="col-lg-6 mb-4 mb-lg-0 text-center">
+                                                <div class="illustration-frame">
+                                                    @if ($row->animasi)
+                                                        <img src="{{ Storage::url($row->animasi) }}" alt="Animasi {{ $row->kode_gejala }}" class="illustration-img">
+                                                    @else
+                                                        <div class="text-center">
+                                                            <i class="fa fa-gamepad illustration-placeholder-icon"></i>
+                                                            <p class="text-muted font-italic m-0 mt-3" style="font-size: 13px;">Ilustrasi Pendukung {{ $row->kode_gejala }}</p>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <!-- Right side: Interactive Vertical Zig-Zag Timeline -->
+                                            <div class="col-lg-6">
+                                                <div class="options-container pl-lg-3">
+                                                    <span class="options-list-label mb-4">
+                                                        <i class="fa fa-heartbeat text-danger mr-2"></i>Tingkat Keyakinan Anda:
+                                                    </span>
+
+                                                    <div class="timeline-wrapper" data-gejala-id="{{ $row->id }}">
+                                                        <div class="timeline-line-path"></div>
+
+                                                        <!-- Row 1: Tidak Yakin (Left Side) - Value 0 -->
+                                                        <div class="timeline-row {{ old('gejala.' . $row->id) === '0' ? 'selected' : '' }}">
+                                                            <div class="timeline-col left-col">
+                                                                <button type="button" class="btn timeline-btn {{ old('gejala.' . $row->id) === '0' ? 'selected' : '' }}" data-value="0">
+                                                                    Tidak Yakin
+                                                                </button>
+                                                            </div>
+                                                            <div class="timeline-node"></div>
+                                                            <div class="timeline-col empty-col"></div>
+                                                        </div>
+
+                                                        <!-- Row 2: Cukup Yakin (Right Side) - Value 0.4 -->
+                                                        <div class="timeline-row {{ old('gejala.' . $row->id) === '0.4' ? 'selected' : '' }}">
+                                                            <div class="timeline-col empty-col"></div>
+                                                            <div class="timeline-node"></div>
+                                                            <div class="timeline-col right-col">
+                                                                <button type="button" class="btn timeline-btn {{ old('gejala.' . $row->id) === '0.4' ? 'selected' : '' }}" data-value="0.4">
+                                                                    Cukup Yakin
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Row 3: Yakin (Left Side) - Value 0.6 -->
+                                                        <div class="timeline-row {{ old('gejala.' . $row->id) === '0.6' ? 'selected' : '' }}">
+                                                            <div class="timeline-col left-col">
+                                                                <button type="button" class="btn timeline-btn {{ old('gejala.' . $row->id) === '0.6' ? 'selected' : '' }}" data-value="0.6">
+                                                                    Yakin
+                                                                </button>
+                                                            </div>
+                                                            <div class="timeline-node"></div>
+                                                            <div class="timeline-col empty-col"></div>
+                                                        </div>
+
+                                                        <!-- Row 4: Sangat Yakin (Right Side) - Value 0.8 -->
+                                                        <div class="timeline-row {{ old('gejala.' . $row->id) === '0.8' ? 'selected' : '' }}">
+                                                            <div class="timeline-col empty-col"></div>
+                                                            <div class="timeline-node"></div>
+                                                            <div class="timeline-col right-col">
+                                                                <button type="button" class="btn timeline-btn {{ old('gejala.' . $row->id) === '0.8' ? 'selected' : '' }}" data-value="0.8">
+                                                                    Sangat Yakin
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Row 5: Sangat Yakin Sekali / Pasti (Left Side) - Value 1.0 -->
+                                                        <div class="timeline-row {{ old('gejala.' . $row->id) === '1.0' ? 'selected' : '' }}">
+                                                            <div class="timeline-col left-col">
+                                                                <button type="button" class="btn timeline-btn {{ old('gejala.' . $row->id) === '1.0' ? 'selected' : '' }}" data-value="1.0">
+                                                                    Sangat Yakin / Pasti
+                                                                </button>
+                                                            </div>
+                                                            <div class="timeline-node"></div>
+                                                            <div class="timeline-col empty-col"></div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <!-- Footer Actions & Pagination -->
+                            <div class="screening-footer text-center">
+                                <nav aria-label="Page navigation" class="pagination-nav-wrapper my-2 my-lg-0">
+                                    <ul class="pagination justify-content-center mb-0" id="screeningPagination">
+                                        <li class="page-item" id="pagPrev">
+                                            <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        @foreach ($gejala as $index => $row)
+                                            <li class="page-item {{ $index === 0 ? 'active' : '' }}" id="pag_{{ $index }}" data-target-index="{{ $index }}">
+                                                <a class="page-link" href="javascript:void(0)">{{ $index + 1 }}</a>
+                                            </li>
+                                        @endforeach
+                                        <li class="page-item" id="pagNext">
+                                            <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+
+                                <div class="mt-3" id="submitBtnContainer" style="display: none; width: 100%;">
+                                    <button type="submit" class="btn nav-btn nav-btn-submit mx-auto" id="btnSubmitForm">
+                                        <i class="fa fa-check-circle mr-2"></i> Proses Hasil Skrining
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -767,6 +767,15 @@
             var totalSlides = {{ count($gejala) }};
             var answeredTracker = {}; // tracks which question indices have been answered
 
+            // Initialize answeredTracker on page load based on pre-selected classes (from old values)
+            $('.screening-slide').each(function(idx) {
+                var hasSelection = $(this).find('.timeline-row.selected').length > 0;
+                if (hasSelection) {
+                    answeredTracker[idx] = true;
+                    $('#pag_' + idx).addClass('answered');
+                }
+            });
+
             // Initialize progress bar, slide arrow states, and sliding pagination window
             updateProgress();
             updatePaginationArrows();
@@ -787,6 +796,7 @@
                 }
             });
 
+            // Pagination arrow clicks
             $('#pagNext').click(function(e) {
                 e.preventDefault();
                 if (currentIdx < totalSlides - 1) {
@@ -824,6 +834,9 @@
                     setTimeout(function() {
                         goToSlide(currentIdx + 1);
                     }, 500);
+                } else {
+                    // We are on the final slide! Since they just answered it, show the submit button!
+                    $('#submitBtnContainer').show().addClass('animate pulse infinite');
                 }
             });
 
@@ -855,8 +868,8 @@
                 // Manage pagination arrow states
                 updatePaginationArrows();
 
-                // Show/hide submit button on the final slide
-                if (currentIdx === totalSlides - 1) {
+                // Show/hide submit button on the final slide only if it is answered
+                if (currentIdx === totalSlides - 1 && answeredTracker[currentIdx]) {
                     $('#submitBtnContainer').show().addClass('animate pulse infinite');
                 } else {
                     $('#submitBtnContainer').hide().removeClass('animate pulse infinite');

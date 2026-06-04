@@ -19,7 +19,7 @@
       
       <div class="container" align="center">
                   <h1 align="center">
-                      Diagnosa
+                      Skrinning
                   </h1>
                   <p align="center" class="text-muted">Isi data diri Pasien</p>
 <hr>

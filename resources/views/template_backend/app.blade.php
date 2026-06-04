@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('assets/bootstrap-select/css/bootstrap-select.min.css') }}">
     <!-- TinyMCE -->
     <script src="https://cdn.tiny.cloud/1/95z1wlpdzasy0ulf89wyn6yu2avjhespgwuamxxar1gnlmh5/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
 
     <link rel="shortcut icon" href="{{ asset('assets/images/SkriningApp.png') }}" type="image/x-icon">
@@ -33,14 +34,17 @@
             color: #ffffff !important;
             letter-spacing: 1px;
             font-size: 1.1rem;
-            margin-left: 5px;
+            transition: opacity 0.3s ease;
         }
 
         .brand-link {
+            display: flex !important;
+            align-items: center;
+            padding: 0.8125rem 0.5rem !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
-            transition: background 0.3s ease;
-            white-space: nowrap; /* Mencegah teks turun ke baris baru */
-            display: block !important;
+            transition: background 0.3s ease, padding 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
         }
         
         .brand-link:hover {
@@ -48,14 +52,28 @@
         }
 
         .brand-image {
-            float: left;
-            line-height: .8;
-            margin-left: .8rem;
-            margin-right: .5rem;
-            margin-top: -2px;
-            max-height: 33px; /* Membatasi tinggi logo agar sejajar dengan teks */
+            max-height: 33px;
             width: auto;
             border-radius: 4px;
+            margin-left: 0.8rem;
+            margin-right: 0.8rem;
+            transition: margin 0.3s ease;
+        }
+
+        /* --- COLLAPSED SIDEBAR LOGO FIX --- */
+        .sidebar-collapse .brand-link {
+            justify-content: center !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        .sidebar-collapse .brand-link .brand-image {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+
+        .sidebar-collapse .brand-link .brand-text {
+            display: none !important;
         }
 
         /* --- CUSTOM MODERN SIDEBAR CSS --- */
@@ -147,7 +165,7 @@
             <!-- Brand Logo (Sudah Diperbaiki Agar Sejajar) -->
             <a href="{{ route('home') }}" class="brand-link">
                 <img src="{{ asset('assets/images/Logoo.png') }}" alt="Logo" class="brand-image">
-                <span class="d-block text-white">SkriningApp</span>
+                <span class="brand-text text-white">SkriningApp</span>
             </a>
 
             <!-- Sidebar -->

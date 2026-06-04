@@ -166,7 +166,7 @@
                                     <td>{{ $hasil->alamat }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Tanggal Diagnosa</th>
+                                    <th>Tanggal Skrinning</th>
                                     <td>{{ $hasil->created_at->format('d-m-Y H:i') }} WIB</td>
                                 </tr>
                             </table>
@@ -176,10 +176,10 @@
                     <!-- Kolom Hasil Diagnosa -->
                     <div class="col-md-6">
                         <div class="info-card" style="background-color: #fff; border-color: #36b9cc;">
-                            <h5 class="info-title" style="border-bottom-color: #36b9cc;"><i class="fas fa-stethoscope mr-2"></i> Kesimpulan Diagnosa</h5>
+                            <h5 class="info-title" style="border-bottom-color: #36b9cc;"><i class="fas fa-stethoscope mr-2"></i> Kesimpulan Skrining</h5>
                             <table class="table table-sm table-info-custom">
                                 <tr>
-                                    <th class="align-top">Hasil Diagnosa</th>
+                                    <th class="align-top">Hasil Skrining</th>
                                     <td>
                                         <span class="badge-hasil">{{ $hasil->kecanduan->nama_kecanduan ?? 'Tidak diketahui' }}</span>
                                     </td>

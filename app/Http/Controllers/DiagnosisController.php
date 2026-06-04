@@ -80,7 +80,7 @@ class DiagnosisController extends Controller
         return view('diagnosis_hasil', compact('hasil', 'nama_kecanduan', 'solusi', 'gejala', 'nilai_cf', 'data_diri'));
     }
 
-    // -------- metode Certainty Factor (tanpa fuzzy) --------- START
+    // -------- metode Certainty Factor --------- START
     public function certainty_factor($gejala)
     {
         $hasil = [];
@@ -98,7 +98,7 @@ class DiagnosisController extends Controller
                     if ($id_gejala == $a->gejala_id) {
                         $g = floatval($g);
                         if ($g > 0) {
-                            $cf_user = $g; // langsung gunakan nilai CF user tanpa fuzzifikasi
+                            $cf_user = $g; // langsung gunakan nilai CF user 
                         }
                     }
                 }
@@ -130,7 +130,7 @@ class DiagnosisController extends Controller
 
         return $hasil;
     }
-    // -------- metode Certainty Factor (tanpa fuzzy) --------- END
+    // -------- metode Certainty Factor --------- END
 
     // fungsi untuk mengurutkan array berdasarkan kolom
     function array_sort_by_column(&$arr, $col, $dir = SORT_DESC)

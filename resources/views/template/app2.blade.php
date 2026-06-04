@@ -19,6 +19,49 @@
     <link href="{{ asset('assets/frontend/css/responsive.css') }}" rel="stylesheet" />
 
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-awal.png') }}" type="image/x-icon">
+    
+    <style>
+        /* Premium Header Styling Overrides */
+        .header_section {
+            background: rgba(3, 131, 239, 0.96) !important;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+            font-size: 15px;
+            padding: 8px 20px !important;
+            border-radius: 100px;
+            transition: all 0.2s ease;
+            margin: 0 4px;
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-item.active .nav-link {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.2) !important;
+            font-weight: 600;
+        }
+
+        /* Adjust body padding slightly to offset sticky header */
+        body.sub_page {
+            position: relative;
+        }
+    </style>
 </head>
 
 <body class="sub_page">
