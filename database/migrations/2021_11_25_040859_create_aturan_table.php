@@ -28,10 +28,6 @@ class CreateAturanTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('nama_tabel', 'aturan_...')) {
-        Schema::table('nama_tabel', function (Blueprint $table) {
-        $table->dropColumn('aturan_...');
-    });
-}
+        Schema::dropIfExists('aturan');
     }
 }
